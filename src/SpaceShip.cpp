@@ -26,9 +26,23 @@ void SpaceShip::update(float deltaTime)
     {
         mSprite.move({0.f, 3.f});
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space))
+
+    // boundry check
+    if (mSprite.getPosition().x < 0)
     {
-        fireBullet();
+        mSprite.setPosition({0, mSprite.getPosition().y});
+    }
+    if (mSprite.getPosition().x > 800)
+    {
+        mSprite.setPosition({800, mSprite.getPosition().y});
+    }
+    if (mSprite.getPosition().y < 0)
+    {
+        mSprite.setPosition({mSprite.getPosition().x, 0});
+    }
+    if (mSprite.getPosition().y > 540)
+    {
+        mSprite.setPosition({mSprite.getPosition().x, 540});
     }
 }
 void SpaceShip::draw(sf::RenderWindow &window) const
@@ -36,9 +50,11 @@ void SpaceShip::draw(sf::RenderWindow &window) const
     Entity::draw(window); // Use the base class draw function
 }
 
-void SpaceShip::fireBullet()
+bool SpaceShip::shouldFireBullet() const
 {
-    std::cout << "Firing bullet!" << std::endl;
-    // Create a new bullet entity
-    // mBullets.emplace_back(mResourceManager.getTexture("Bullet"), mSprite.getPosition(), sf::Vector2f(0.0f, -1.0f), 200.0f);
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space);
+}
+sf::Vector2f SpaceShip::getPosition() const
+{
+    return mSprite.getPosition();
 }

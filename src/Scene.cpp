@@ -9,10 +9,38 @@ Scene ::Scene(ResourceManager &resourceManager) : mResourceManager(resourceManag
 void Scene::update(sf::Time deltaTime)
 {
     mSpaceShip.update(deltaTime.asSeconds());
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Space))
+    { // Example input
+        fireBullet(mSpaceShip.getPosition() + sf::Vector2f(0.0f, -10.0f));
+    }
+
+    // Update bullets
+    for (auto &bullet : mBullets)
+    {
+        bullet.update(deltaTime.asSeconds());
+    }
+    for (auto &bullet : mBullets)
+    {
+        bullet.update(deltaTime.asSeconds());
+        mBullets.erase(std::remove_if(mBullets.begin(), mBullets.end(),
+                                      [](const Bullet &bullet)
+                                      {
+                                          return bullet.getPosition().y < 0; // Example condition
+                                      }),
+                       mBullets.end());
+    }
 }
 
 void Scene::draw(sf::RenderWindow &window)
 {
     mSpaceShip.draw(window);
-    mBullet.draw(window);
+    for (const auto &bullet : mBullets)
+    {
+        bullet.draw(window);
+    }
+}
+
+void Scene::fireBullet(const sf::Vector2f &position)
+{
+    mBullets.emplace_back(mResourceManager.getTexture("Bullet"), position, 300.0f); // Example speed
 }

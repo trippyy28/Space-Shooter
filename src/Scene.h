@@ -12,10 +12,11 @@ public:
     void update(sf::Time deltaTime);
     void handleEvent(const sf::Event &event);
     void collisionDetection();
+    void fireBullet(const sf::Vector2f &position);
 
 private:
     ResourceManager &mResourceManager;
-    // std::vector<Bullets> mBullets;
+    std::vector<Bullet> mBullets;
     sf::Font mFont;
     int mScore = 0;
     SpaceShip mSpaceShip;
