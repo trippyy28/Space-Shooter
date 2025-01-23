@@ -12,5 +12,5 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp src/Game.cpp src/Circle.cpp src/SpaceShip.cpp src/Entity.cpp src/ResourceManager.cpp src/Scene.cpp src/Bullet.cpp)
+add_executable(main src/main.cpp src/Game.cpp src/Circle.cpp src/SpaceShip.cpp src/Entity.cpp src/ResourceManager.cpp src/Scene.cpp src/Bullet.cpp src/Btn.cpp)
 target_link_libraries(main PRIVATE SFML::Graphics)

@@ -2,6 +2,7 @@
 #include "ResourceManager.h"
 #include "SpaceShip.h"
 #include "Bullet.h"
+#include "Btn.h"
 class Scene
 {
 
@@ -21,4 +22,5 @@ private:
     int mScore = 0;
     SpaceShip mSpaceShip;
     Bullet mBullet;
+    Btn mBtn;
 };
